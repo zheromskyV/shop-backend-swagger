@@ -3,7 +3,7 @@ info:
   title: "Swagger Shop-Backend"
   contact:
     email: "vladislavzheromsky@gmail.com"
-host: "https://1crvlfyexi.execute-api.eu-west-1.amazonaws.com"
+host: "1crvlfyexi.execute-api.eu-west-1.amazonaws.com"
 basePath: "/dev"
 tags:
 - name: "product-service"
