@@ -6,20 +6,20 @@ info:
 host: "1crvlfyexi.execute-api.eu-west-1.amazonaws.com"
 basePath: "/dev"
 tags:
-- name: "product-service"
-  description: "Handles operations regarding Products"
+  - name: "product-service"
+    description: "Handles operations regarding Products"
 schemes:
-- "https"
+  - "https"
 paths:
   /products:
     get:
       tags:
-      - "product-service"
+        - "product-service"
       summary: "Get all products"
       operationId: "getProductList"
       description: "Returns all products"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "success"
@@ -27,21 +27,53 @@ paths:
             type: "array"
             items:
               $ref: '#/definitions/Product'
+    post:
+      tags:
+        - "product-service"
+      summary: "Create new product"
+      operationId: "createProduct"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product to add"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "title"
+            properties:
+              title:
+                type: "string"
+              price:
+                type: "integer"
+              count:
+                type: "integer"
+              description:
+                type: "string"
+      responses:
+        201:
+          description: "Product created"
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: "Bad request"
   /products/{productId}:
     get:
       tags:
-      - "product-service"
+        - "product-service"
       summary: "Get product by ID"
       description: "Return product by its' id"
       operationId: "getProductById"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "productId"
-        in: "path"
-        description: "id of the product to find"
-        required: true
-        type: "string"
+        - name: "productId"
+          in: "path"
+          description: "id of the product to find"
+          required: true
+          type: "string"
       responses:
         200:
           description: "success"
@@ -49,6 +81,8 @@ paths:
             properties:
               product:
                 $ref: '#/definitions/Product'
+        400:
+          description: "Bad request - invalid uuid"
         404:
           description: "Product not found"
 definitions:
@@ -66,8 +100,5 @@ definitions:
       description:
         type: "string"
     required:
-    - "id"
-    - "title"
-    - "price"
-    - "count"
-    - "description"
+      - "id"
+      - "title"
