@@ -78,9 +78,7 @@ paths:
         200:
           description: "success"
           schema:
-            properties:
-              product:
-                $ref: '#/definitions/Product'
+            $ref: '#/definitions/Product'
         400:
           description: "Bad request - invalid uuid"
         404:
